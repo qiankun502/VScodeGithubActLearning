@@ -21,7 +21,7 @@ jobs:
     - name: Cache ARM GCC Toolchain
       uses: actions/cache@v4
       with:
-      cmakePreset: 'default' # Refers to a preset defined in CMakePresets.json
+      cmakePreset: 'buildPresets' # Refers to a preset defined in CMakePresets.json
         #path: C:\arm-gcc\
         #key: arm-gcc-14.2-rel1 # If updating to new version, update this key to pull in new version
    
