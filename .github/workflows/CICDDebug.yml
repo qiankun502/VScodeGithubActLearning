@@ -12,10 +12,9 @@ env:
   
 jobs:
   build:
-
     runs-on: windows-2025
 
-   steps:
+    steps:
     - uses: actions/checkout@v4
     
      - name: Configure and Build
