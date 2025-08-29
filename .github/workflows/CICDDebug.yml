@@ -11,7 +11,7 @@ env:
   BUILD_TYPE: Debug
   
 jobs:
-  build:
+  build_and_test:
     runs-on: windows-2025
 
     steps:
@@ -20,4 +20,4 @@ jobs:
      - name: Configure and Build
       uses: lukka/run-cmake@v10
       with:
-        preset: 'Debug' # Refers to a preset defined in CMakePresets.json
+        configurePreset: 'Debug' # Refers to a preset defined in CMakePresets.json
