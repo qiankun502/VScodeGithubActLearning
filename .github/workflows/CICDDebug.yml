@@ -15,13 +15,10 @@ jobs:
 
     runs-on: windows-2025
 
-    steps:
+   steps:
     - uses: actions/checkout@v4
     
-    - name: Cache ARM GCC Toolchain
-      uses: actions/cache@v4
+     - name: Configure and Build
+      uses: lukka/run-cmake@v10
       with:
-      cmakePreset: 'buildPresets' # Refers to a preset defined in CMakePresets.json
-        #path: C:\arm-gcc\
-        #key: arm-gcc-14.2-rel1 # If updating to new version, update this key to pull in new version
-   
+        preset: 'Debug' # Refers to a preset defined in CMakePresets.json
