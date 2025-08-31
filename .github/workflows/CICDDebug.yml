@@ -12,9 +12,16 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
-    
-     - name: Configure and Build
-      uses: lukka/run-cmake@v10
-      with:
-        configurePreset: 'Debug' # Refers to a preset defined in CMakePresets.json
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-arm-none-eabi build-essential ninja-build
+
+      - name: Configure CMake
+        run: cmake -B build -G Ninja
+
+      - name: Build project
+        run: cmake --build build
