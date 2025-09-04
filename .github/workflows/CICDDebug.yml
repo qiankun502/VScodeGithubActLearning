@@ -41,6 +41,7 @@ jobs:
       with:
         path: ${{ github.workspace }}\Tests\googletest-src
         key: gtest-cache-1.14.0
+        run: echo "The workspace path is: $GITHUB_WORKSPACE"
 
     - name: Download GTest (1.14.0) # If update to new version, update cache key
       if: steps.cache-gtest.outputs.cache-hit != 'true'
