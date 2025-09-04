@@ -61,8 +61,8 @@ jobs:
         -DBUILD_TESTS=OFF
         -DCMAKE_C_COMPILER="arm-none-eabi-gcc" 
         -DCMAKE_CXX_COMPILER="arm-none-eabi-g++" 
-        -S ${{github.workspace}}\Firmware
-        -B ${{github.workspace}}\Firmware\cmake-debug 
+        -S ${{github.workspace}}
+        -B ${{github.workspace}}\cmake-debug 
         -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
     - name: Build Firmware
