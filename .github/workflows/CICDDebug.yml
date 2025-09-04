@@ -49,11 +49,36 @@ jobs:
         7z x v1.14.0.zip -o${{ github.workspace }}\Tests\
         Rename-Item -Path "${{ github.workspace }}\Tests\googletest-1.14.0" -NewName "googletest-src"
 
-    - name: Configure CMake for Unit Tests
+
+        
+        
+        
+    - name: Configure CMake for Firmware
       run: >
         cmake -G "MinGW Makefiles"
-        -DBUILD_FIRMWARE=OFF
-        -DBUILD_TESTS=ON
-        -S "${{ github.workspace }}\Tests"
-        -B "${{ github.workspace }}\Tests\build-tests"
-        -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}      
+        -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}\cmake\arm-none-eabi-gcc.cmake
+        -DBUILD_FIRMWARE=ON
+        -DBUILD_TESTS=OFF
+        -DCMAKE_C_COMPILER="arm-none-eabi-gcc" 
+        -DCMAKE_CXX_COMPILER="arm-none-eabi-g++" 
+        -S ${{github.workspace}}\Firmware
+        -B ${{github.workspace}}\Firmware\cmake-debug 
+        -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+    - name: Build Firmware
+      # Build your program with the given configuration
+      run: cmake --build ${{github.workspace}}\cmake-debug --config ${{env.BUILD_TYPE}}
+      
+    - name: Put current date into a variable
+      run: |
+        $NOW=& Get-Date -format "yyyyMMdd_HHmmss"
+        echo "NOW=$NOW" >> $env:GITHUB_ENV
+      
+    - name: Upload Debug Binary
+      uses: actions/upload-artifact@v4
+      with:
+        name: DEBUG_Direct_${{env.NOW}}
+        path: |
+          ${{github.workspace}}\cmake-debug\CICDTest.elf
+          ${{github.workspace}}\cmake-debug\CICDTest.hex
+          ${{github.workspace}}\cmake-debug\CICDTest.bin
