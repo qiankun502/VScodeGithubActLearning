@@ -76,6 +76,7 @@ jobs:
       # Build your program with the given configuration
       run: cmake --build ${{github.workspace}}\VScodeTest\cmake-debug --config ${{env.BUILD_TYPE}}
       
+      
     - name: Put current date into a variable
       run: |
         $NOW=& Get-Date -format "yyyyMMdd_HHmmss"
