@@ -87,6 +87,6 @@ jobs:
       with:
         name: DEBUG_Direct_${{env.NOW}}
         path: |
-          ${{github.workspace}}\cmake-debug\CICDTest.elf
-          ${{github.workspace}}\cmake-debug\CICDTest.hex
-          ${{github.workspace}}\cmake-debug\CICDTest.bin
+          ${{github.workspace}}\VScodeTest\cmake-debug\CICDTest.elf
+          ${{github.workspace}}\VScodeTest\cmake-debug\CICDTest.hex
+          ${{github.workspace}}\VScodeTest\cmake-debug\CICDTest.bin
