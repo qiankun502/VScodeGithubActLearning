@@ -54,6 +54,6 @@ jobs:
         cmake -G "MinGW Makefiles"
         -DBUILD_FIRMWARE=OFF
         -DBUILD_TESTS=ON
-        -S "${{ github.workspace }}\VScodeGithubActLearning\Tests"
-        -B "${{ github.workspace }}\VScodeGithubActLearning\Tests\build-tests"
+        -S "${{ github.workspace }}\Tests"
+        -B "${{ github.workspace }}\Tests\build-tests"
         -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}      
