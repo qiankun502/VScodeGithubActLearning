@@ -39,6 +39,7 @@ jobs:
       id: cache-gtest
       uses: actions/cache@v4
       with:
+        echo ${{ github.workspace }}
         path: ${{ github.workspace }}\VScodeGithubActLearning\Tests\googletest-src
         key: gtest-cache-1.14.0
 
