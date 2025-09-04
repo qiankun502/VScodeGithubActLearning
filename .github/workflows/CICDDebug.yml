@@ -49,7 +49,14 @@ jobs:
         7z x v1.14.0.zip -o${{ github.workspace }}\Tests\
         Rename-Item -Path "${{ github.workspace }}\Tests\googletest-1.14.0" -NewName "googletest-src"
 
-
+    - name: Configure CMake for Unit Tests
+      run: >
+        cmake -G "MinGW Makefiles"
+        -DBUILD_FIRMWARE=OFF
+        -DBUILD_TESTS=ON
+        -S "${{ github.workspace }}\Tests"
+        -B "${{ github.workspace }}\Tests\build-tests"
+        -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}      
         
         
         
@@ -61,13 +68,13 @@ jobs:
         -DBUILD_TESTS=OFF
         -DCMAKE_C_COMPILER="arm-none-eabi-gcc" 
         -DCMAKE_CXX_COMPILER="arm-none-eabi-g++" 
-        -S ${{github.workspace}}
-        -B ${{github.workspace}}\cmake-debug 
+        -S ${{github.workspace}}\VScodeTest
+        -B ${{github.workspace}}\VScodeTest\cmake-debug 
         -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
     - name: Build Firmware
       # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}}\cmake-debug --config ${{env.BUILD_TYPE}}
+      run: cmake --build ${{github.workspace}}\VScodeTest\cmake-debug --config ${{env.BUILD_TYPE}}
       
     - name: Put current date into a variable
       run: |
