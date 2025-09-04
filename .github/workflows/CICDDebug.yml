@@ -63,7 +63,7 @@ jobs:
     - name: Configure CMake for Firmware
       run: >
         cmake -G "MinGW Makefiles"
-        -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}\VScodeTest\cmake\arm-none-eabi-gcc.cmake
+        -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}\VScodeTest\cmake\gcc-arm-none-eabi.cmake
         -DBUILD_FIRMWARE=ON
         -DBUILD_TESTS=OFF
         -DCMAKE_C_COMPILER="arm-none-eabi-gcc" 
