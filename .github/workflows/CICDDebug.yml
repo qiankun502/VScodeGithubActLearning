@@ -6,22 +6,30 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Debug
   
 jobs:
   build:
-    runs-on: ubuntu-latest
+
+    runs-on: windows-2025
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v4
+    
+    - name: Cache ARM GCC Toolchain
+      id: cache-arm-gcc
+      uses: actions/cache@v4
+      with:
+        path: C:\arm-gcc\
+        key: arm-gcc-14.2-rel1 # If updating to new version, update this key to pull in new version
+        
+    - name: Download ARM GCC Toolchain (14.2.Rel1) # If update to new version, update cache key
+      if: steps.cache-arm-gcc.outputs.cache-hit != 'true'
+      run: |
+        curl -LO https://developer.arm.com/-/media/Files/downloads/gnu/14.2.rel1/binrel/arm-gnu-toolchain-14.2.rel1-mingw-w64-x86_64-arm-none-eabi.zip
+        7z x arm-gnu-toolchain-14.2.rel1-mingw-w64-x86_64-arm-none-eabi.zip -oC:\arm-gcc
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gcc-arm-none-eabi build-essential ninja-build
-
-      - name: Configure CMake
-        run: cmake -B build -G Ninja
-
-      - name: Build project
-        run: cmake --build build
+    - name: Add GCC to PATH
+      run: echo "C:\arm-gcc\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
