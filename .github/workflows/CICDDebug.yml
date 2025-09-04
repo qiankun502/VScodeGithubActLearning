@@ -69,12 +69,12 @@ jobs:
         -DCMAKE_C_COMPILER="arm-none-eabi-gcc" 
         -DCMAKE_CXX_COMPILER="arm-none-eabi-g++" 
         -S ${{github.workspace}}\VScodeTest
-        -B ${{github.workspace}}\VScodeTest\cmake
+        -B ${{github.workspace}}\VScodeTest\cmake-debug 
         -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
     - name: Build Firmware
       # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}}\VScodeTest --config ${{env.BUILD_TYPE}}
+      run: cmake --build ${{github.workspace}}\VScodeTest\cmake-debug --config ${{env.BUILD_TYPE}}
       
       
     - name: Put current date into a variable
@@ -87,6 +87,6 @@ jobs:
       with:
         name: DEBUG_Direct_${{env.NOW}}
         path: |
-          ${{github.workspace}}\VScodeTest\CICDTest.elf
-          ${{github.workspace}}\VScodeTest\CICDTest.hex
-          ${{github.workspace}}\VScodeTest\CICDTest.bin
+          ${{github.workspace}}\VScodeTest\cmake\CICDTest.elf
+          ${{github.workspace}}\VScodeTest\cmake\CICDTest.hex
+          ${{github.workspace}}\VScodeTest\cmake\CICDTest.bin
