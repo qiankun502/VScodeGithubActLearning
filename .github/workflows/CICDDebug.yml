@@ -69,7 +69,7 @@ jobs:
         -DCMAKE_C_COMPILER="arm-none-eabi-gcc" 
         -DCMAKE_CXX_COMPILER="arm-none-eabi-g++" 
         -S ${{github.workspace}}\VScodeTest
-        -B ${{github.workspace}}\VScodeTest\cmake-debug 
+        -B ${{github.workspace}}\VScodeTest\cmake
         -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
     - name: Build Firmware
