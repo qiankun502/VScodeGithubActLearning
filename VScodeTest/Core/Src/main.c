@@ -93,6 +93,11 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+    int i = 0;
+    i++;
+    if (i > 10) {
+      i = 0;
+    } 
 
     /* USER CODE BEGIN 3 */
   }
