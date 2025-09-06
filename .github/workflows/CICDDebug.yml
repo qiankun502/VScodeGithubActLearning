@@ -58,7 +58,12 @@ jobs:
         -B "${{ github.workspace }}\Tests\build-tests"
         -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}      
         
-        
+     - name: Build Unit Tests
+      run: >
+        cmake --build "${{ github.workspace }}\Traverse_CAN_Gateway_Direct_Proj\Tests\build-tests" 
+        --config ${{ env.BUILD_TYPE }}
+        --target runTests
+
         
     - name: Configure CMake for Firmware
       run: >
