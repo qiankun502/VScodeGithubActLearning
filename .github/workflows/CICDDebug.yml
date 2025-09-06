@@ -57,7 +57,15 @@ jobs:
         -S "${{ github.workspace }}\Tests"
         -B "${{ github.workspace }}\Tests\build-tests"
         -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}      
-     
+        
+     - name: Build Unit Tests
+      run: >
+        cmake --build "${{ github.workspace }}\Tests\build-tests" 
+        --config ${{ env.BUILD_TYPE }}
+        --target runTests
+
+    - name: Run Unit Tests
+      run: "${{ github.workspace }}\Tests\build-tests\runTests.exe"       
         
     - name: Configure CMake for Firmware
       run: >
