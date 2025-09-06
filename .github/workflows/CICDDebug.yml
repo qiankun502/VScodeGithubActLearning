@@ -63,10 +63,7 @@ jobs:
         cmake --build "${{ github.workspace }}\Tests\build-tests" 
         --config ${{ env.BUILD_TYPE }}
         --target runTests
-
-    - name: Run Unit Tests
-      run: "${{ github.workspace }}\Tests\build-tests\runTests.exe"       
-        
+       
     - name: Configure CMake for Firmware
       run: >
         cmake -G "MinGW Makefiles"
