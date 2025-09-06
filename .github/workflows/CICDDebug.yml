@@ -65,7 +65,7 @@ jobs:
         --target runTests
 
     - name: Run Unit Tests
-      run: "${{ github.workspace }}\Tests\build-tests\runTests.exe"       
+      run: "${{ github.workspace }}/Tests/build-tests/runTests.exe"       
         
     - name: Configure CMake for Firmware
       run: >
